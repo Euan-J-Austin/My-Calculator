@@ -14,7 +14,7 @@
 
 #can just enter al input at once and have user confirm it is correct? does python account for order of ops? 
 
-active_input = input("Input all operands and operators: ")
+
 stored_input = []
 
 def current_output(active_input):
@@ -25,25 +25,28 @@ def current_output(active_input):
     pass
 
 def clear_entry(stored_input):
-  del stored_input[:-1]
-  return print(stored_input)
+  del stored_input[-1]
+  return print(stored_input[0:])
   
 
 def clear_all(stored_input):
   stored_input.clear()
   return print(stored_input)
 
-## need a while loop here, while ai != calc
+def entry(active_input):
+    if active_input == 'CE':
+      clear_entry(stored_input)
+    elif active_input == 'C':
+      clear_all(stored_input)
+    elif active_input == 'Execute':
+      pass
+    elif active_input != 'CE' and 'C' and 'Execute':
+      for o in active_input:
+        stored_input.append(o)
+      print(f'Stored input is {stored_input}')
+      print(f'Current output is {current_output(active_input)}')
+      entry(active_input = input("Enter all operands and operators: "))
 
-if active_input == 'CE':
-  stored_input = stored_input[0:-1]
-  print(stored_input)
-elif active_input == 'C':
-  clear_all(stored_input)
-elif active_input != 'CE' and 'C':
-  for o in active_input:
-      stored_input.append(o)
-  print(f'Stored input is {stored_input}')
-  print(stored_input[0:-1])
-  print(f'Current output is {current_output(active_input)}')
-  active_input = input("Input all operands and operators: ")
+entry(active_input = input("Enter all operands and operators: "))
+
+
