@@ -24,15 +24,26 @@ def current_output(active_input):
   except TypeError:
     pass
 
-while active_input != 'Calculate':
-  stored_input.append(active_input)
+def clear_entry(stored_input):
+  del stored_input[:-1]
+  return print(stored_input)
+  
+
+def clear_all(stored_input):
+  stored_input.clear()
+  return print(stored_input)
+
+## need a while loop here, while ai != calc
+
+if active_input == 'CE':
+  stored_input = stored_input[0:-1]
+  print(stored_input)
+elif active_input == 'C':
+  clear_all(stored_input)
+elif active_input != 'CE' and 'C':
+  for o in active_input:
+      stored_input.append(o)
   print(f'Stored input is {stored_input}')
+  print(stored_input[0:-1])
   print(f'Current output is {current_output(active_input)}')
   active_input = input("Input all operands and operators: ")
-else:
-  pass
-
-print(stored_input)
-
-#can you convert a string to binary and sum?
-
