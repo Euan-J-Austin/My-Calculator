@@ -14,7 +14,7 @@
 
 
 stored_input = []
-memory = []
+memory = ['0']
 
 class calculateOutput:
   def __init__(self):
@@ -43,14 +43,30 @@ class memoryUtility:
   def modify(actinp):
     if actinp == 'MC':
       memory.clear()
-    elif actinp == 'MR':
+    elif actinp == '+MR' or '-MR' or '*MR' or '/MR' or '**MR':
+#       stored = ['2', '+', '2']
+# m = '**MR'
+# MR = 2
+# stored.append(m)
+# print(eval(''.join(stored)))
       pass
     elif actinp == 'M+':
-      sum(actinp)
+      new_mem= eval(''.join(memory)) + eval(''.join(stored_input))
+      memory.clear()
+      memory.append(new_mem)
+      print(memory)
+      active.entry(input("Enter all operands and operators: "))
     elif actinp == 'M-':
-      pass
+      new_mem = eval(''.join(memory)) - eval(''.join(stored_input))
+      memory.clear()
+      memory.append(new_mem)
+      print(memory)
+      active.entry(input("Enter all operands and operators: "))
     elif actinp == 'MS':
-      pass
+      memory.clear()
+      memory.append(eval(''.join(stored_input)))
+      print(memory)
+      active.entry(input("Enter all operands and operators: "))
 
 class activeEntry(modifyStoredInput, calculateOutput):
   def __init__(self):
@@ -58,9 +74,8 @@ class activeEntry(modifyStoredInput, calculateOutput):
   def entry(self, actinp):
       if actinp[0] == 'C':
         modifyStoredInput.modify(actinp)
-      elif actinp[0] == 'M':
+      elif actinp[0] or actinp[1] or actinp[2] == 'M':
         memoryUtility.modify(actinp)
-        pass
       elif actinp == 'Execute':
         pass
         #use map function? 
@@ -77,4 +92,3 @@ modify = modifyStoredInput()
 calculate = calculateOutput()
 
 active.entry(input("Enter all operands and operators: "))
-
