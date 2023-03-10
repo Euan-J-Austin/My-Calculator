@@ -18,13 +18,16 @@ memory = ['0']
 
 class calculateOutput:
   def __init__(self):
-    pass
+    self.x = eval(''.join(si))
 
-  def current_output(si):
+  def current_output(self, si):
     #need try test here 
-    return eval(''.join(si))
-
-class modifyStoredInput:
+    return self.x
+  
+  def execute(self, si):
+    return print(f'The final value is: {self.x}.')
+                 
+class modifyStoredInput:              
   def __init__(self):
     pass
   def modify(actinp):
@@ -44,29 +47,23 @@ class memoryUtility:
     if actinp == 'MC':
       memory.clear()
     elif actinp == '+MR' or '-MR' or '*MR' or '/MR' or '**MR':
-#       stored = ['2', '+', '2']
-# m = '**MR'
-# MR = 2
-# stored.append(m)
-# print(eval(''.join(stored)))
-      pass
-    elif actinp == 'M+':
-      new_mem= eval(''.join(memory)) + eval(''.join(stored_input))
-      memory.clear()
-      memory.append(new_mem)
-      print(memory)
-      active.entry(input("Enter all operands and operators: "))
-    elif actinp == 'M-':
-      new_mem = eval(''.join(memory)) - eval(''.join(stored_input))
-      memory.clear()
-      memory.append(new_mem)
-      print(memory)
-      active.entry(input("Enter all operands and operators: "))
-    elif actinp == 'MS':
-      memory.clear()
-      memory.append(eval(''.join(stored_input)))
-      print(memory)
-      active.entry(input("Enter all operands and operators: "))
+      if actinp == 'M+':
+        new_mem= eval(''.join(memory)) + eval(''.join(stored_input))
+        memory.clear()
+        memory.append(new_mem)
+        print(memory)
+        active.entry(input("Enter all operands and operators: "))
+      elif actinp == 'M-':
+        new_mem = eval(''.join(memory)) - eval(''.join(stored_input))
+        memory.clear()
+        memory.append(new_mem)
+        print(memory)
+        active.entry(input("Enter all operands and operators: "))
+      elif actinp == 'MS':
+        memory.clear()
+        memory.append(eval(''.join(stored_input)))
+        print(memory)
+        active.entry(input("Enter all operands and operators: "))
 
 class activeEntry(modifyStoredInput, calculateOutput):
   def __init__(self):
@@ -77,8 +74,7 @@ class activeEntry(modifyStoredInput, calculateOutput):
       elif actinp[0] or actinp[1] or actinp[2] == 'M':
         memoryUtility.modify(actinp)
       elif actinp == 'Execute':
-        pass
-        #use map function? 
+        calculateOutput.execute() 
       elif actinp != 'CE' and 'C' and 'Execute':
         for o in actinp:
           if o != ' ':
