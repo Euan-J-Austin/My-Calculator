@@ -1,10 +1,10 @@
-#next, using memory on stored input, append operand then integer value of memory
+#next, clean-up outputs and additions to CLI?
 
 class activeInput:
   def __init__(self):
     pass
   def enter(i):
-    try: 
+    try:
       if i[0] == 'C':
         storedInput.modify_stored(i)
       elif i == 'E':
@@ -17,7 +17,7 @@ class activeInput:
             stored.append(x)
             print(stored)
             activeInput.enter(input('Enter: '))
-    except IndexError: #deals with case of single operand or operator, where elif i[-2] == 'M' forces IndexError 
+    except IndexError: #deals with case of single operand or operator, where elif i[-2] == 'M' forces IndexError
       stored.append(i)
       print(stored)
       activeInput.enter(input('Enter: '))
@@ -26,13 +26,45 @@ class activeMemory:
   def __init__(self):
     pass
   def modify_memory(x):
+    global MR #or will be assumed to be local as assigned a value in the function's body
     if x == 'MS':
       MR = stored
       print(f'test {MR}')
+      print(eval(''.join(MR)))
       activeInput.enter(input('Enter: '))
     elif x == 'MC':
       MR = []
       print(f'test1 {MR}')
+      activeInput.enter(input('Enter: '))
+    elif x == '**MR':
+      operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
+      stored.append(x[:-2])  #operator
+      stored.append(operand) #operand
+      print(eval(''.join(stored)))
+      activeInput.enter(input('Enter: '))
+    elif x == '/MR':
+      operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
+      stored.append(x[:-2])  #operator
+      stored.append(operand) #operand
+      print(eval(''.join(stored)))
+      activeInput.enter(input('Enter: '))
+    elif x == '*MR':
+      operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
+      stored.append(x[:-2])  #operator
+      stored.append(operand) #operand
+      print(eval(''.join(stored)))
+      activeInput.enter(input('Enter: '))
+    elif x == '+MR':
+      operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
+      stored.append(x[:-2])  #operator
+      stored.append(operand) #operand
+      print(eval(''.join(stored)))
+      activeInput.enter(input('Enter: '))
+    elif x == '-MR':
+      operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
+      stored.append(x[:-2])  #operator
+      stored.append(operand) #operand
+      print(eval(''.join(stored)))
       activeInput.enter(input('Enter: '))
 
 class storedInput:
@@ -58,4 +90,4 @@ class Output:
 MR = []
 stored = []
 
-activeInput.enter(input('Enter: ')) #must input single operand or operator 
+activeInput.enter(input('Enter: ')) #must input single operand or operator
