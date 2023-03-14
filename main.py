@@ -1,3 +1,5 @@
+#next, using memory on stored input, append operand then integer value of memory
+
 class activeInput:
   def __init__(self):
     pass
@@ -5,15 +7,17 @@ class activeInput:
     try: 
       if i[0] == 'C':
         storedInput.modify_stored(i)
+      elif i == 'E':
+        Output.eval_output(i)
       elif i[-2] == 'M':
-          activeMemory.modify_memory(i)
+        activeMemory.modify_memory(i)
       else:
         for x in i:
           if x != ' ':
             stored.append(x)
             print(stored)
             activeInput.enter(input('Enter: '))
-    except IndexError: #deals with case of single operand or operator
+    except IndexError: #deals with case of single operand or operator, where elif i[-2] == 'M' forces IndexError 
       stored.append(i)
       print(stored)
       activeInput.enter(input('Enter: '))
@@ -26,7 +30,7 @@ class activeMemory:
       MR = stored
       print(f'test {MR}')
       activeInput.enter(input('Enter: '))
-    if x == 'MC':
+    elif x == 'MC':
       MR = []
       print(f'test1 {MR}')
       activeInput.enter(input('Enter: '))
@@ -44,7 +48,14 @@ class storedInput:
       print(f'test stored CE {stored}')
       activeInput.enter(input('Enter: '))
 
+class Output:
+  def __init__(self):
+    pass
+  def eval_output(x):
+    if x == 'E':
+      return print(eval(''.join(stored)))
+
 MR = []
 stored = []
 
-activeInput.enter(input('Enter: '))
+activeInput.enter(input('Enter: ')) #must input single operand or operator 
