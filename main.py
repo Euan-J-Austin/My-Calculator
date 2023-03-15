@@ -1,6 +1,4 @@
 #next, clean-up outputs and CLI additions?
-#reduce MR to single conditional
-#NOW ... why can't successive MR operations be performed?
 
 class activeInput:
   def __init__(self):
@@ -39,40 +37,12 @@ class activeMemory:
       MR = []
       print(f'test1 {MR}')
       activeInput.enter(input('Enter: '))
-    # elif x == '**MR':
-    #   operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
-    #   stored.append(x[:-2])  #operator
-    #   stored.append(operand) #operand
-    #   print(eval(''.join(stored)))
-    #   activeInput.enter(input('Enter: '))
-    # elif x == '/MR':
-    #   operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
-    #   stored.append(x[:-2])  #operator
-    #   stored.append(operand) #operand
-    #   print(eval(''.join(stored)))
-    #   activeInput.enter(input('Enter: '))
-    # elif x == '*MR':
-    #   operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
-    #   stored.append(x[:-2])  #operator
-    #   stored.append(operand) #operand
-    #   print(eval(''.join(stored)))
-    #   activeInput.enter(input('Enter: '))
-    elif x == '+MR':
+    elif x[-2:] == 'MR':
       operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
       stored.append(x[:-2])  #operator
       stored.append(operand) #operand
-      print(stored)
-      print(MR)
       print(eval(''.join(stored)))
-      del MR[-1]
-      del MR[-1]
       activeInput.enter(input('Enter: '))
-    # elif x == '-MR':
-    #   operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
-    #   stored.append(x[:-2])  #operator
-    #   stored.append(operand) #operand
-    #   print(eval(''.join(stored)))
-    #   activeInput.enter(input('Enter: '))
 
 class storedInput:
   def __init__(self):
@@ -98,4 +68,3 @@ MR = []
 stored = []
 
 activeInput.enter(input('Enter: ')) #must input single operand or operator
-
