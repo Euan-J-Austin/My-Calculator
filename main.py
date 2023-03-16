@@ -1,4 +1,4 @@
-#next, clean-up outputs and CLI additions?
+import os 
 
 class activeInput:
   def __init__(self):
@@ -15,12 +15,10 @@ class activeInput:
         for x in i:
           if x != ' ':
             stored.append(x)
-            print(stored)
-            activeInput.enter(input('Enter: '))
+            activeInput.enter(Output.general_output())
     except IndexError: #deals with case of single operand or operator, where elif i[-2] == 'M' forces IndexError
       stored.append(i)
-      print(stored)
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
 
 class activeMemory:
   def __init__(self):
@@ -30,19 +28,15 @@ class activeMemory:
     global stored
     if x == 'MS':
       MR = stored.copy()
-      print(f'test {MR}')
-      print(eval(''.join(MR)))
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
     elif x == 'MC':
       MR = []
-      print(f'test1 {MR}')
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
     elif x[-2:] == 'MR':
       operand = str(eval(''.join(MR))) #assign to a new variable as appending to stored affects MR for some reason
       stored.append(x[:-2])  #operator
       stored.append(operand) #operand
-      print(eval(''.join(stored)))
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
 
 class storedInput:
   def __init__(self):
@@ -50,12 +44,10 @@ class storedInput:
   def modify_stored(x):
     if x == 'C':
       stored.clear()
-      print(f'test stored C {stored}')
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
     if x == 'CE':
       del stored[-1]
-      print(f'test stored CE {stored}')
-      activeInput.enter(input('Enter: '))
+      activeInput.enter(Output.general_output())
 
 class Output:
   def __init__(self):
@@ -63,8 +55,25 @@ class Output:
   def eval_output(x):
     if x == 'E':
       return print(eval(''.join(stored)))
+  def general_output():
+    os.system('clear')
+    try:
+      general_stored = eval(''.join(stored))
+    except SyntaxError:
+      general_stored = 0
+    try:
+      general_MR = eval(''.join(MR))
+    except SyntaxError:
+      general_MR = 0
+    return input(f"""
+STORED is {general_stored}.
+[CE] [C]
+MEMORY is {general_MR}.
+[MS] [MC] [+MR] [-MR] [*MR] [/MR] [**MR]
 
+ENTER: """)
+      
 MR = []
 stored = []
 
-activeInput.enter(input('Enter: ')) #must input single operand or operator
+activeInput.enter(Output.general_output())
