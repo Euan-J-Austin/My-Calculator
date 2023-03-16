@@ -54,7 +54,8 @@ class Output:
     pass
   def eval_output(x):
     if x == 'E':
-      return print(eval(''.join(stored)))
+      e = eval(''.join(stored))
+      return print(f'\nThe final value is {e}.')
   def general_output():
     os.system('clear')
     try:
@@ -66,10 +67,12 @@ class Output:
     except SyntaxError:
       general_MR = 0
     return input(f"""
-STORED is {general_stored}.
+STORED is {stored} = {general_stored}.
 [CE] [C]
-MEMORY is {general_MR}.
+MEMORY is {MR} = {general_MR}.
 [MS] [MC] [+MR] [-MR] [*MR] [/MR] [**MR]
+
+Type E to execute calculation.
 
 ENTER: """)
       
